@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:whatsappclone/model_view_controller/chats/cubits/all_chats_cubit.dart';
 import 'package:whatsappclone/model_view_controller/chats/cubits/conversation_cubit.dart';
 import 'package:whatsappclone/models/chat_model.dart';
 import 'package:whatsappclone/screens/chats/chat_conversation.dart';
@@ -13,7 +14,7 @@ class HeaderChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
+      onTap: () async {
         Navigator.push(
           context,
           MaterialPageRoute(

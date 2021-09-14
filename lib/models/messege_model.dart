@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:whatsappclone/models/messege_content.dart';
 import 'package:whatsappclone/utils/enums.dart';
@@ -7,22 +8,22 @@ import 'package:whatsappclone/utils/enums.dart';
 class MessegeModel {
   MessegeModel({
     @required this.time,
-    @required this.sendByMe,
-    @required this.isForwarded,
+    @required this.sender,
+    this.forwarded = false,
     @required this.messegeType,
     @required this.content,
   });
   DateTime time;
-  bool sendByMe;
-  bool isForwarded;
+  bool sender;
+  bool forwarded;
   MessegeType messegeType;
   MessegeContent content;
 
   Map<String, dynamic> toMap() {
     return {
       'time': time.millisecondsSinceEpoch,
-      'sendByMe': sendByMe,
-      'isForwarded': isForwarded,
+      'sender': 'uid1',
+      'forwarded': forwarded,
       'messegeType': messegeType.toString(),
       'content': content.getContent(),
     };
@@ -30,21 +31,21 @@ class MessegeModel {
 
   MessegeModel.fromMap(Map<String, dynamic> map) {
     time = DateTime.fromMillisecondsSinceEpoch(map['time']);
-    sendByMe = map['sendByMe'];
-    isForwarded = map['isForwarded'];
+    sender = _senderIsMe(map['sender']);
+    forwarded = map['forwarded'];
     messegeType = _getMessegeType(map['messegeType']);
     content = MessegeContent.fromMap(map['content']);
   }
 
   factory MessegeModel.sendMessege({
-    @required bool isForwarded,
+    @required bool forwarded,
     @required MessegeType messegeType,
     @required MessegeContent content,
   }) {
     return MessegeModel(
         time: DateTime.now(),
-        sendByMe: true,
-        isForwarded: isForwarded,
+        sender: true,
+        forwarded: forwarded,
         messegeType: messegeType,
         content: content);
   }
@@ -61,5 +62,13 @@ class MessegeModel {
       return MessegeType.voice;
     else
       return MessegeType.text;
+  }
+
+  bool _senderIsMe(String senderId) {
+    final String myId = 'uid1';
+    if (senderId == myId)
+      return true;
+    else
+      return false;
   }
 }

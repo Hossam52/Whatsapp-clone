@@ -1,7 +1,7 @@
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:whatsappclone/config/constants.dart';
+import 'package:whatsappclone/config/colors.dart';
 import 'package:whatsappclone/models/messege_model.dart';
 
 class MessegeView extends StatelessWidget {
@@ -21,21 +21,21 @@ class MessegeView extends StatelessWidget {
   }
 
   Color _getMessegeBackgroundColor() {
-    if (messege.sendByMe)
+    if (messege.sender)
       return messegeBackgroundColorIfSenderMe;
     else
       return messegeBackgroundColorIfSenderOthers;
   }
 
   BubbleNip _getBubbleNip() {
-    if (messege.sendByMe)
+    if (messege.sender)
       return BubbleNip.rightTop;
     else
       return BubbleNip.leftTop;
   }
 
   Alignment _getMessegeAlignment() {
-    if (messege.sendByMe)
+    if (messege.sender)
       return Alignment.topRight;
     else
       return Alignment.topLeft;

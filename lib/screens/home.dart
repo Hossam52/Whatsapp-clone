@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/screens/calls/calls_screen.dart';
 import 'package:whatsappclone/screens/chats/all_chats.dart';
+import 'package:whatsappclone/screens/statuses/status_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen() {
     pages.add(_TabBarItem(header: Icon(Icons.camera_alt), page: Container()));
     pages.add(_TabBarItem(header: Text('CHATS'), page: AllChatsScreen()));
-    pages.add(_TabBarItem(
-        header: Text('STATUS'),
-        page: Center(
-            child: Container(
-          child: Text('status'),
-        ))));
-    pages.add(_TabBarItem(
-        header: Text('CALLS'),
-        page: Center(
-            child: Container(
-          child: Text('calls'),
-        ))));
+    pages.add(_TabBarItem(header: Text('STATUS'), page: StatusScreen()));
+    pages.add(_TabBarItem(header: Text('CALLS'), page: CallsScreen()));
   }
   final List<_TabBarItem> pages = [];
   @override
@@ -32,6 +24,7 @@ class HomeScreen extends StatelessWidget {
               IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))
             ],
             bottom: TabBar(
+              labelPadding: const EdgeInsets.all(8),
               indicatorColor: Colors.white,
               labelColor: Colors.white,
               tabs: pages.map((e) => e.header).toList(),

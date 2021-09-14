@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/config/constants.dart';
+import 'package:whatsappclone/config/colors.dart';
 
 class LightThemeConstants {
   final Color primaryColor = lightPrimaryColor;

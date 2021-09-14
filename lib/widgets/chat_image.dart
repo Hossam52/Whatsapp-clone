@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ChatImage extends StatelessWidget {
-  const ChatImage(
-      {Key key,
-      //  @required this.radius,
-      @required this.imageLink})
+  const ChatImage({Key key, @required this.imageLink, this.radius = 25})
       : super(key: key);
-  // final double radius;
   final String imageLink;
+  final double radius;
   @override
   Widget build(BuildContext context) {
     return FittedBox(
       child: CircleAvatar(
+        radius: radius,
         backgroundImage: AssetImage(imageLink),
       ),
     );

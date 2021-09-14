@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:whatsappclone/model_view_controller/chats/cubits/all_chats_cubit.dart';
 import 'package:whatsappclone/model_view_controller/chats/cubits/conversation_cubit.dart';
 import 'package:whatsappclone/model_view_controller/chats/states/conversation_states.dart';
-import 'package:whatsappclone/models/chat_model.dart';
 import 'package:whatsappclone/models/messege_content.dart';
 import 'package:whatsappclone/models/messege_model.dart';
 import 'package:whatsappclone/screens/chats/conversation_settings.dart';
-import 'package:whatsappclone/utils/enums.dart';
 import 'package:whatsappclone/widgets/chat_image.dart';
+import 'package:whatsappclone/widgets/loading_indecator.dart';
 import 'package:whatsappclone/widgets/messege_view.dart';
 
 class ChatConversationScreen extends StatefulWidget {
@@ -64,7 +63,7 @@ class _ChatConversationScreenState extends State<ChatConversationScreen> {
         ),
         body: Column(
           children: [
-            Expanded(child: _displayChatMesseges()),
+            Expanded(child: _displayChatMesseges(context)),
             _buildInputField(context),
           ],
         ));
@@ -104,10 +103,11 @@ class _ChatConversationScreenState extends State<ChatConversationScreen> {
     ];
   }
 
-  Widget _displayChatMesseges() {
+  Widget _displayChatMesseges(context) {
     return BlocBuilder<ConversationCubit, ConversationStates>(
         builder: (_, state) {
       final messeges = ConversationCubit.instance(context).getMesseges;
+      if (messeges == null) return LoadingIndecator();
       return Align(
         alignment: Alignment.bottomCenter,
         child: ListView.builder(
@@ -183,8 +183,7 @@ class _ChatConversationScreenState extends State<ChatConversationScreen> {
     return IconButton(
       onPressed: () {
         ConversationCubit.instance(context)
-            .sendMessege(true, TextContent(_textEditingController.text));
-        AllChatsCubit.instance(context).updateAllChatsView();
+            .sendMessege(false, TextContent(_textEditingController.text));
         setState(() {
           _scrollToBottom();
           _textEditingController.clear();
