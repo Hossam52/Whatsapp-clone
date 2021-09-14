@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:whatsappclone/model_view_controller/chats/cubits/all_chats_cubit.dart';
-import 'package:whatsappclone/model_view_controller/chats/cubits/conversation_cubit.dart';
 import 'package:whatsappclone/models/chat_model.dart';
-import 'package:whatsappclone/screens/chats/chat_conversation.dart';
 import 'package:whatsappclone/widgets/chat_image.dart';
 
 class HeaderChat extends StatelessWidget {
@@ -15,15 +12,8 @@ class HeaderChat extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => BlocProvider<ConversationCubit>(
-              create: (_) => ConversationCubit(chatModel),
-              child: ChatConversationScreen(),
-            ),
-          ),
-        );
+        AllChatsCubit.instance(context)
+            .navigateToChatScreen(context, chatModel);
       },
       child: Row(
         children: [

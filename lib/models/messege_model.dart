@@ -1,7 +1,5 @@
-import 'dart:convert';
-
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
+import 'package:whatsappclone/model_view_controller/chats/cubits/all_chats_cubit.dart';
 import 'package:whatsappclone/models/messege_content.dart';
 import 'package:whatsappclone/utils/enums.dart';
 
@@ -22,7 +20,7 @@ class MessegeModel {
   Map<String, dynamic> toMap() {
     return {
       'time': time.millisecondsSinceEpoch,
-      'sender': 'uid1',
+      'sender': currentUserId,
       'forwarded': forwarded,
       'messegeType': messegeType.toString(),
       'content': content.getContent(),
@@ -65,8 +63,7 @@ class MessegeModel {
   }
 
   bool _senderIsMe(String senderId) {
-    final String myId = 'uid1';
-    if (senderId == myId)
+    if (senderId == currentUserId)
       return true;
     else
       return false;

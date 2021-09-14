@@ -5,7 +5,7 @@ import 'package:whatsappclone/utils/helpers/essential_chat_data_model.dart';
 class ChatModel extends EssentialChatData {
   ChatModel(
       {@required this.id,
-      @required this.lastMessege,
+      this.lastMessege,
       @required this.unReedMesseges,
       @required chatImageLink,
       @required String chatName,

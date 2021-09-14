@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:whatsappclone/model_view_controller/chats/cubits/all_chats_cubit.dart';
 import 'package:whatsappclone/model_view_controller/chats/cubits/conversation_cubit.dart';
 import 'package:whatsappclone/model_view_controller/chats/states/conversation_states.dart';
 import 'package:whatsappclone/models/messege_content.dart';
-import 'package:whatsappclone/models/messege_model.dart';
 import 'package:whatsappclone/screens/chats/conversation_settings.dart';
 import 'package:whatsappclone/widgets/chat_image.dart';
 import 'package:whatsappclone/widgets/loading_indecator.dart';
-import 'package:whatsappclone/widgets/messege_view.dart';
+import 'package:whatsappclone/screens/chats/widgets/messege_view.dart';
 
 class ChatConversationScreen extends StatefulWidget {
   ChatConversationScreen({Key key}) : super(key: key);

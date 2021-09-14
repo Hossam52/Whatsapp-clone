@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:whatsappclone/model_view_controller/chats/cubits/conversation_cubit.dart';
 import 'package:whatsappclone/model_view_controller/chats/states/conversation_states.dart';
-import 'package:whatsappclone/widgets/setting_option.dart';
+import 'package:whatsappclone/screens/chats/widgets/setting_option.dart';
 
 class NotificationControllGroup extends StatelessWidget {
   const NotificationControllGroup({Key key}) : super(key: key);

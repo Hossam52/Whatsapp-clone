@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/model_view_controller/chats/cubits/conversation_cubit.dart';
-import 'package:whatsappclone/widgets/media_content.dart';
-import 'package:whatsappclone/widgets/notification_control_group.dart';
-import 'package:whatsappclone/widgets/setting_option.dart';
+import 'package:whatsappclone/screens/chats/widgets/media_content.dart';
+import 'package:whatsappclone/screens/chats/widgets/notification_control_group.dart';
+import 'package:whatsappclone/screens/chats/widgets/setting_option.dart';
 
 class ConversationSettings extends StatelessWidget {
   @override

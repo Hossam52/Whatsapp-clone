@@ -34,16 +34,19 @@ class ConversationCubit extends Cubit<ConversationStates> {
 
   bool get muteNotification => _muteNotification;
 
-  void _listenToMesseges() {
+  void _listenToMesseges() async {
     final chatMessegesStream =
         FirebaseRealTime.instance.getAllChatMessages(_chatData.id);
 
     _chatMessegesStream = chatMessegesStream.listen((event) async {
-      final allMesseges = Map<String, dynamic>.from(event.snapshot.value);
-      _messeges = allMesseges.values
-          .map((messege) =>
-              MessegeModel.fromMap(Map<String, dynamic>.from(messege)))
-          .toList();
+      if (event.snapshot.exists) {
+        final allMesseges = Map<String, dynamic>.from(event.snapshot.value);
+        _messeges = allMesseges.values
+            .map((messege) =>
+                MessegeModel.fromMap(Map<String, dynamic>.from(messege)))
+            .toList();
+      } else
+        _messeges = [];
 
       emit(MessegesChangedState());
     });
@@ -52,6 +55,7 @@ class ConversationCubit extends Cubit<ConversationStates> {
   void sendMessege(bool isForwarded, MessegeContent content) {
     FirebaseRealTime.instance.sendMessege(
         _chatData.id,
+        _chatData.friendId,
         MessegeModel(
             time: DateTime.now(),
             sender: true,
